@@ -26,7 +26,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -47,6 +50,11 @@
             <groupId>org.springframework.experimental.ai</groupId>
             <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
             <version>0.2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.flatirons</groupId>
+            <artifactId>api</artifactId>
+            <version>999.999-hotfix-8.0.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

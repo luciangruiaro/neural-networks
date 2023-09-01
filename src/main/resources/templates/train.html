@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Neural Network</title>
+    <link rel="stylesheet" href="css/train.css">
+</head>
+<body>
+<div class="container">
+    <div class="grid-container">
+        <div class="input-image">
+            <h2>Input Image</h2>
+            <div id="inputGrid"></div>
+        </div>
+        <div class="expected-result">
+            <h2>Expected Result</h2>
+            <div id="outputGrid"></div>
+        </div>
+    </div>
+
+    <div class="network-info">
+        <h3>Network Information</h3>
+        <p>Input Layer Size: <span id="inputLayerSize"></span></p>
+        <p>Hidden Layers: <span id="hiddenLayers"></span></p>
+        <p>Weights: <span id="weights"></span></p>
+    </div>
+
+    <button id="submitBtn">Submit</button>
+</div>
+
+
+<script src="js/train.js"></script>
+</body>
+</html>
