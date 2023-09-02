@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.neuron {
+    fill: #3498db;
+}
+
+.line {
+    stroke: black;
+    stroke-width: 1px;
+}
+
+text {
+    pointer-events: none; /* Ensure text doesn't interfere with mouse events */
+}

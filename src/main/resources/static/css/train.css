@@ -61,16 +61,6 @@ button:hover {
     background-color: #0bb5b5;
 }
 
-.network-info {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.network-info h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
 .grid-container {
     display: flex;
     flex-direction: row;  /* This ensures the items are side by side */

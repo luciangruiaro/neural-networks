@@ -60,16 +60,5 @@ document.addEventListener("DOMContentLoaded", function () {
         // Reload the page after submitting
         location.reload();
     });
-    // Call the function on page load
-    fetchNetworkInfo();
 });
 
-function fetchNetworkInfo() {
-    fetch('/train')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('inputLayerSize').textContent = data.inputLayerSize;
-            document.getElementById('hiddenLayers').textContent = data.hiddenLayers;
-            document.getElementById('weights').textContent = data.weights;
-        });
-}
