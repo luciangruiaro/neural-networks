@@ -8,7 +8,19 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
-<div class="network" id="network"></div>
+<!-- Hidden elements to store values from Java -->
+<input type="hidden" id="noInputNeurons" th:value="${noInputNeurons}"/>
+<input type="hidden" id="noHiddenLayers" th:value="${noHiddenLayers}"/>
+<input type="hidden" id="noNeuronsPerHiddenLayer" th:value="${noNeuronsPerHiddenLayer}"/>
+<input type="hidden" id="noOutputNeurons" th:value="${noOutputNeurons}"/>
+<!-- Hidden element to store neuron values from Java -->
+<input type="hidden" id="neuronValues" th:value="${neuronValues}" />
+
+
+<div id="container">
+    <div id="network"></div>
+</div>
+
 <script src="js/network-d3.js"></script>
 </body>
 </html>
