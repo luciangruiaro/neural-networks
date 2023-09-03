@@ -14,13 +14,18 @@
 <input type="hidden" id="noNeuronsPerHiddenLayer" th:value="${noNeuronsPerHiddenLayer}"/>
 <input type="hidden" id="noOutputNeurons" th:value="${noOutputNeurons}"/>
 <!-- Hidden element to store neuron values from Java -->
-<input type="hidden" id="neuronValues" th:value="${neuronValues}" />
+<input type="hidden" id="inputNeuronValues" th:value="${inputNeuronValues}"/>
+<input type="hidden" id="hiddenNeuronValues" th:value="${hiddenNeuronValues}"/>
+<input type="hidden" id="outputNeuronValues" th:value="${outputNeuronValues}"/>
 
 
 <div id="container">
     <div id="network"></div>
 </div>
 
+<script src="js/network/layers.js"></script>
+<script src="js/network/neurons.js"></script>
+<script src="js/network/synapses.js"></script>
 <script src="js/network-d3.js"></script>
 </body>
 </html>

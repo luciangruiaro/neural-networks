@@ -7,12 +7,24 @@ body {
     background-color: #f4f4f4;
 }
 
+.inputNeuron {
+    fill: #2db6c9;
+}
+
+.hiddenNeuron {
+    fill: #2db6c9;
+}
+
+.outputNeuron {
+    fill: #2db6c9;
+}
+
 .neuron {
     fill: #2db6c9;
 }
 
 .line {
-    stroke: black;
+    stroke: rgba(112, 112, 112, 0.93);
     stroke-width: 1px;
 }
 
