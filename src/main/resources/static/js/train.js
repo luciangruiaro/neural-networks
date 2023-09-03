@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const N = 9; // or whatever size you want for NxN grid
+    const N = 14; // or whatever size you want for NxN grid
     const M = 10; // for 0-9 in Mx1 grid
 
 // Dynamically set the grid-template-columns property

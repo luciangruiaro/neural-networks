@@ -1,4 +1,4 @@
-package ro.luciangruia.neuralnetworks.model;
+package ro.luciangruia.neuralnetworks.models;
 
 public class TrainingData {
     private int[] input;

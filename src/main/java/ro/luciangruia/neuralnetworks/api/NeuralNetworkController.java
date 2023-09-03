@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ro.luciangruia.neuralnetworks.helpers.DataHelper;
-import ro.luciangruia.neuralnetworks.model.TrainingData;
+import ro.luciangruia.neuralnetworks.models.TrainingData;
 
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
 
 @Controller
 public class NeuralNetworkController {
@@ -39,7 +41,7 @@ public class NeuralNetworkController {
 
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {
-        int noInputNeurons = 32;
+        int noInputNeurons = NEURAL_NETWORK_INPUT_RESOLUTION ^ 2;
         int noHiddenLayers = 3;
         int noNeuronsPerHiddenLayer = 6;
         int noOutputNeurons = 10;
