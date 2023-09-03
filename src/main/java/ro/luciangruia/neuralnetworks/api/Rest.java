@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.*;
-
 @RestController
 public class Rest {
 
@@ -14,11 +12,8 @@ public class Rest {
 
     @GetMapping("/hello")
     public String hello() {
-        System.out.println("hello");
-        return "Hello World!";
+        logger.info("Ana are mere.");
+        return "Ana are mere.";
     }
-
-
-
 
 }
