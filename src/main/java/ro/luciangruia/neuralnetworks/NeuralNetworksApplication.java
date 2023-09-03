@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NeuralNetworksApplication {
 
     public static void main(String[] args) {
-//        InputTemplate inputTemplate = new InputTemplate();
-//        System.out.println(inputTemplate.getNumberOne());
         SpringApplication.run(NeuralNetworksApplication.class, args);
     }
 

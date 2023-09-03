@@ -50,7 +50,7 @@ public class NeuralNetworkController {
         model.addAttribute("noNeuronsPerHiddenLayer", noNeuronsPerHiddenLayer);
         model.addAttribute("noOutputNeurons", noOutputNeurons);
 
-        Random rand = new Random();
+        Random rand = new Random(); // TODO replace with NN weights
         int totalNeurons = noInputNeurons + noHiddenLayers * noNeuronsPerHiddenLayer + noOutputNeurons;
         double[] neuronValuesArray = IntStream.range(0, totalNeurons).mapToDouble(i -> Math.round(rand.nextDouble() * 100.0) / 100.0).toArray();
 

@@ -1,4 +1,4 @@
-package ro.luciangruia.neuralnetworks;
+package ro.luciangruia.neuralnetworks.api;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,13 +7,14 @@ import java.io.InputStreamReader;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.RES_PYTHON_PATH;
 
-public class PythonCaller {
+public class PythonApi {
 
     public static void main(String[] args) {
         invokePythonScript(NEURAL_NETWORK_INPUT_RESOLUTION);
     }
 
     private static void invokePythonScript(int n) {
+        // invoke the python script
         ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/generate_training_data.py", "--n", String.valueOf(n)).redirectErrorStream(true);
 
         try {

@@ -36,4 +36,8 @@ if __name__ == '__main__':
                         help='The value for n in generate_nxn_digit.')
 
     args = parser.parse_args()
+
+    if args.n == 0:
+        args.n = 28
+
     generate_nxn_digit(args.n)
