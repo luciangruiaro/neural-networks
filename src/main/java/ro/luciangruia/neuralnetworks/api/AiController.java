@@ -26,6 +26,6 @@ public class AiController {
 
     @GetMapping("/hello")
     public String hi() {
-        return "sasa";
+        return "hi";
     }
 }
