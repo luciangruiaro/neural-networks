@@ -63,7 +63,7 @@ public class PythonApi {
         Files.write(filePath, neuronStatesJson.getBytes(StandardCharsets.UTF_8));
 
         // invoke the python script
-        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/plots/ne.py ", filePath.toString());
+        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/plots/neuron_evolution.py ", filePath.toString());
         processBuilder.start();
     }
 }
