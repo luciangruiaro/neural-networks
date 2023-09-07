@@ -1,7 +1,7 @@
 import json
 import matplotlib.pyplot as plt
-import sys
 import os
+import sys
 
 # Predefined filename
 FILENAME = "neuronStates.json"
@@ -18,13 +18,23 @@ def process_json_data(data):
     # Split weights into separate lists (assuming each NeuronState has an equal number of weights)
     weight_lists = list(zip(*weights))
 
+    # Create a new figure with a specified size (width, height)
+    plt.figure(figsize=(10, 6))
+
+    # Plotting weights
     for i, weight_list in enumerate(weight_lists, 1):
         plt.plot(weight_list, label=f"Weight {i}")
 
-    # Plot bias weights
-    plt.plot(bias_weights, label="Bias Weight", linestyle='--', color='black')  # Using dashed line for bias weights
+    # Plotting bias weights
+    plt.plot(bias_weights, color='black', label="Bias Weight")
 
+    # Setting labels, title, grid, and legend
+    plt.xlabel('Epochs')
+    plt.ylabel('Weight Value')
+    plt.title('Evolution of Neuron Weights and Bias Over Epochs')
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     plt.legend()
+    plt.tight_layout()
     plt.show()
 
 

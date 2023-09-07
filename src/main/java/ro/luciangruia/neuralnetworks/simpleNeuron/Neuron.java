@@ -13,10 +13,10 @@ import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeur
 @Component
 public class Neuron {
 
-    protected int noInputs;
-    protected double[] weights;
-    protected double bias = 1.0;
-    protected double biasWeight;
+    public int noInputs;
+    public double[] weights;
+    public double bias = 1.0;
+    public double biasWeight;
 
     protected Neuron(int inputSize) {
         noInputs = inputSize;

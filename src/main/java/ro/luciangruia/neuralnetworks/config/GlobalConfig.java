@@ -20,7 +20,7 @@ public class GlobalConfig {
 
     // SINGLE NEURON
     public static final double SN_OUTPUT_THRESHOLD = 0.5;
-    public static final double SN_LEARNING_RATE = 0.1;
+    public static final double SN_LEARNING_RATE = 0.1; // Controls the step size during weight updates in training.
     public static final int SN_INPUT_SIZE = 3;
     public static final int SN_EPOCHS = 1000;
 

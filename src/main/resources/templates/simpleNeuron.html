@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Simple Neuron</title>
+    <link rel="stylesheet" th:href="@{/css/simpleNeuron.css}">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script th:src="@{/js/simpleNeuron.js}"></script>
+</head>
+<body>
+<div id="neuronVisual"></div>
+
+<!-- Pass Java variables to JavaScript -->
+<script th:inline="javascript">
+    var inputValues = [[${inputValues}]];
+    var weights = [[${weights}]];
+    var biasWeight = [[${biasWeight}]];
+    var activated = [[${activated}]];
+    var output = [[${output}]];
+    var outputClassified = [[${outputClassified}]];
+</script>
+
+</body>
+</html>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_EPOCHS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_INPUT_SIZE;
 import static ro.luciangruia.neuralnetworks.simpleNeuron.Test.testSingleNeuron;
 import static ro.luciangruia.neuralnetworks.simpleNeuron.Train.trainMoreEpochs;
 
@@ -16,38 +17,43 @@ import static ro.luciangruia.neuralnetworks.simpleNeuron.Train.trainMoreEpochs;
 public class SimpleNeuronService {
 
     @Autowired
-    Neuron singleNeuron;
-
-    @Autowired
     PythonApi pythonApi;
+
+    static Neuron singleNeuron = new Neuron(SN_INPUT_SIZE);
 
     private static List<NeuronState> neuronStates = new ArrayList<>();
 
+    // Test scenario
+    double[] newInput = {1, 0, 0};
+
+    // Training Data set
+    double[][] trainingDataSet = {
+            {0, 0, 0},
+            {0, 0, 1},
+//            {0, 1, 0},
+//            {0, 1, 1},
+//            {1, 0, 0},
+//            {1, 0, 1},
+            {1, 1, 0},
+            {1, 1, 1}};
+    //    double[] expectedOutputs = {0, 0, 0, 0, 1, 1, 1, 1};
+    double[] expectedOutputs = {0, 0, 1, 1};
+
     @SneakyThrows
-    public void main() {
-        // Training Data set
-        double[][] trainingDataSet = {{0, 0, 0}, {0, 0, 1},
-//                {0, 1, 0},
-//                {0, 1, 1},
-//                {1, 0, 0},
-//                {1, 0, 1},
-                {1, 1, 0}, {1, 1, 1}};
-//        double[] expectedOutputs = {0, 0, 0, 0, 1, 1, 1, 1};
-        double[] expectedOutputs = {0, 0, 1, 1};
+    public NeuronVisualiser getEducatedNeuron() {
 
-        // Test scenario
-        double[] newInput = {1, 0, 1};
-
-        // Initial
         testSingleNeuron(newInput, singleNeuron, "initial");
 
-        // Training
         neuronStates = trainMoreEpochs(trainingDataSet, expectedOutputs, singleNeuron, SN_EPOCHS);
 
-        // Test after training
+        pythonApi.pyPlotNeuronStates(neuronStates);
+
         testSingleNeuron(newInput, singleNeuron, "after training");
 
-        // Visualise how neuron learned
-        pythonApi.pyPlotNeuronStates(neuronStates);
+        return new NeuronVisualiser(singleNeuron, newInput);
+    }
+
+    public NeuronVisualiser getJustCreatedNeuron() {
+        return new NeuronVisualiser(singleNeuron, newInput);
     }
 }

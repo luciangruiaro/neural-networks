@@ -1,0 +1,24 @@
+.input-circle {
+    fill: rgb(189, 189, 189);
+}
+
+.animated-input {
+    fill: #00ffbe;
+}
+
+.intermediary-circle {
+    fill: rgb(189, 189, 189);
+}
+
+.neuron {
+    fill: #0020bb;
+}
+
+.activated {
+    fill: #00ffbe;
+}
+
+.line {
+    stroke: #757575;
+    stroke-width: 1;
+}
