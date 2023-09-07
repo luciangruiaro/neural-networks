@@ -1,8 +1,9 @@
 package ro.luciangruia.neuralnetworks.config;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class GlobalConfig {
 
     // NEURAL NETWORK ARCHITECTURE
@@ -13,12 +14,18 @@ public class GlobalConfig {
 
     // PATHS
     public static final String DYNAMIC_PATH = System.getProperty("user.dir");
-    public static final String RES_PYTHON_PATH = DYNAMIC_PATH + "/python/training_data";
+    public static final String RES_PYTHON_PATH = DYNAMIC_PATH + "/python";
     public static final String RES_JS_PATH = DYNAMIC_PATH + "/static/js";
     public static final String RES_CSS_PATH = DYNAMIC_PATH + "/static/css";
 
     // SINGLE NEURON
+    public static final double SN_OUTPUT_THRESHOLD = 0.5;
     public static final double SN_LEARNING_RATE = 0.1;
     public static final int SN_INPUT_SIZE = 3;
-    public static final int SN_EPOCHS = 100;
+    public static final int SN_EPOCHS = 1000;
+
+    @Bean
+    public int inputSize() {
+        return SN_INPUT_SIZE;
+    }
 }

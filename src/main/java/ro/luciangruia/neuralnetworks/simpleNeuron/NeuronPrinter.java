@@ -1,20 +1,34 @@
 package ro.luciangruia.neuralnetworks.simpleNeuron;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_LEARNING_RATE;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradient;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.meanSquaredLoss;
 
+@Service
+@Slf4j
 public class NeuronPrinter {
 
     protected static void printNeuronState(Neuron neuron, double expected, double prediction) {
-        System.out.println("Weights: " + java.util.Arrays.toString(neuron.weights));
-        System.out.println("Loss: " + meanSquaredLoss(expected, prediction)); // Squared loss loss
-        System.out.println("Gradient Descent: " + gradientDescent(gradient(expected, prediction, prediction), SN_LEARNING_RATE));
-        System.out.println("Activation Output: " + prediction);
+        printNeuronState(neuron);
+        log.info("Loss: {}", meanSquaredLoss(expected, prediction)); // Squared loss loss
+        log.info("Gradient: {}", gradient(expected, prediction, prediction));
+        log.info("Gradient Descent: {}", gradientDescent(gradient(expected, prediction, prediction)));
+        log.info("Activation Output: {}", prediction);
     }
 
     protected static void printNeuronState(Neuron neuron) {
-        System.out.println("Weights: " + java.util.Arrays.toString(neuron.weights));
+        log.info("---------- Neuron state ----------");
+        log.info("Weights: " + Arrays.toString(neuron.weights));
+        log.info("Bias Weight: " + neuron.biasWeight);
+        log.info("----------------------------------");
+    }
+
+    public static void printNeuronCreation(Neuron neuron) {
+        log.info("Neuron created with {} inputs.", neuron.noInputs);
     }
 }

@@ -1,31 +1,40 @@
 package ro.luciangruia.neuralnetworks.simpleNeuron;
 
+import org.springframework.stereotype.Component;
 import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_LEARNING_RATE;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_OUTPUT_THRESHOLD;
+import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
+import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeuronCreation;
 import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeuronState;
 
+@Component
 public class Neuron {
 
     protected int noInputs;
     protected double[] weights;
-    protected double outputThreshold = 0.5;
     protected double bias = 1.0;
+    protected double biasWeight;
 
     protected Neuron(int inputSize) {
-        this.noInputs = inputSize;
+        noInputs = inputSize;
+        weights = new double[noInputs];
         initializeWeights(noInputs);
+        printCretion();
         printState();
     }
 
     protected double inputSignal(double[] inputValues) {
+        if (inputValues.length != noInputs) {
+            throw new IllegalArgumentException("Mismatch in number of inputs.");
+        }
         double inputSignal = 0;
         for (int i = 0; i < inputValues.length; i++) {
             inputSignal += inputValues[i] * weights[i];
         }
-        inputSignal += bias * weights[noInputs];
+        inputSignal += bias * biasWeight;
         return inputSignal;
     }
 
@@ -34,36 +43,42 @@ public class Neuron {
     }
 
     protected void initializeWeights(int noInputs) {
-        weights = new double[noInputs + 1];
-        for (int i = 0; i < weights.length; i++) {
-            weights[i] = Math.random() - 0.5;
+        for (int i = 0; i < noInputs; i++) {
+            weights[i] = generateRandomWeight();
         }
+        biasWeight = generateRandomWeight();
     }
 
     protected double output(double[] inputValues) {
-        return activationFunction(inputSignal(inputValues)) >= outputThreshold ? 1 : 0;
+        return activationFunction(inputSignal(inputValues));
+    }
+
+    protected double classify(double[] inputValues) {
+        return output(inputValues) >= SN_OUTPUT_THRESHOLD ? 1 : 0;
     }
 
     protected void adjustWeights(double[] inputs, double expected, double prediction) {
-        for (int i = 0; i < weights.length; i++) {
-            if (i < noInputs) {
-                weights[i] += gradientDescent(MathHelpers.gradient(inputs[i], expected, prediction), SN_LEARNING_RATE);
-            } else {
-                weights[i] += gradientDescent(MathHelpers.gradient(1, expected, prediction), SN_LEARNING_RATE);
-            }
+        for (int i = 0; i < noInputs; i++) {
+            weights[i] += gradientDescent(MathHelpers.gradient(inputs[i], expected, prediction));
         }
+        adjustBiasWeight(expected, prediction);
+    }
+
+    private void adjustBiasWeight(double expected, double prediction) {
+        biasWeight += gradientDescent(MathHelpers.gradient(1, expected, prediction));
     }
 
     protected void printState(double expected, double prediction) {
         printNeuronState(this, expected, prediction);
-        System.out.println();
     }
 
     protected void printState() {
         printNeuronState(this);
-        System.out.println();
     }
 
+    protected void printCretion() {
+        printNeuronCreation(this);
+    }
 
 }
 
