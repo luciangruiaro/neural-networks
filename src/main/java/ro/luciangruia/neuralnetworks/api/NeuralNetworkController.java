@@ -41,6 +41,11 @@ public class NeuralNetworkController {
         return ResponseEntity.ok("Data received successfully!");
     }
 
+    @GetMapping("/visualizeInputImage")
+    public String visualizeGrid() {
+        return "visualizeInputImage";
+    }
+
 
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {

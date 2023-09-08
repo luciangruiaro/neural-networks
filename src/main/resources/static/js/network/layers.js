@@ -38,10 +38,10 @@ function drawInputNeurons() {
 }
 
 function drawHiddenLayerNeurons(p) {
-    let actualNeuronsDisplayed = Math.min(noNeuronsPerHiddenLayer, noMaxNeuronsDisplay);
+    let actualNeuronsDisplayed = Math.min(noNeuronsPerHiddenLayer, noMaxNeuronsDisplayHiddenLayers);
     let centerYAdjusted = actualNeuronsDisplayed * neuronGap / 2;
 
-    if (noNeuronsPerHiddenLayer <= noMaxNeuronsDisplay) {
+    if (noNeuronsPerHiddenLayer <= noMaxNeuronsDisplayHiddenLayers) {
         for (let m = 0; m < noNeuronsPerHiddenLayer; m++) {
             svg.append("circle")
                 .attr("class", "neuron hiddenNeuron")
@@ -51,11 +51,11 @@ function drawHiddenLayerNeurons(p) {
         }
     } else {
         // Draw the first neurons
-        for (let m = 0; m < ((noMaxNeuronsDisplay - 1) / 2); m++) {
+        for (let m = 0; m < ((noMaxNeuronsDisplayHiddenLayers - 1) / 2); m++) {
             svg.append("circle")
                 .attr("class", "neuron hiddenNeuron")
                 .attr("cx", (p + 2) * layerGap)
-                .attr("cy", 2 * neuronRadius + centerYAdjusted + (m - (noMaxNeuronsDisplay - 1) / 2) * neuronGap)  // Adjusted for padding
+                .attr("cy", 2 * neuronRadius + centerYAdjusted + (m - (noMaxNeuronsDisplayHiddenLayers - 1) / 2) * neuronGap)  // Adjusted for padding
                 .attr("r", neuronRadius);
         }
         // Draw the ellipsis
@@ -68,7 +68,7 @@ function drawHiddenLayerNeurons(p) {
             .attr("font-size", "11px")
             .attr("fill", "black");
         // Draw the last neurons
-        for (let m = 0; m < ((noMaxNeuronsDisplay - 1) / 2); m++) {
+        for (let m = 0; m < ((noMaxNeuronsDisplayHiddenLayers - 1) / 2); m++) {
             svg.append("circle")
                 .attr("class", "neuron hiddenNeuron")
                 .attr("cx", (p + 2) * layerGap)

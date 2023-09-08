@@ -30,14 +30,14 @@ public class SimpleNeuronService {
     double[][] trainingDataSet = {
             {0, 0, 0},
             {0, 0, 1},
-//            {0, 1, 0},
-//            {0, 1, 1},
+            {0, 1, 0},
+            {0, 1, 1},
 //            {1, 0, 0},
 //            {1, 0, 1},
-            {1, 1, 0},
+//            {1, 1, 0},
             {1, 1, 1}};
-    //    double[] expectedOutputs = {0, 0, 0, 0, 1, 1, 1, 1};
-    double[] expectedOutputs = {0, 0, 1, 1};
+    //        double[] expectedOutputs = {0, 0, 0, 0, 1, 1, 1, 1};
+    double[] expectedOutputs = {0, 0, 0, 0, 1};
 
     @SneakyThrows
     public NeuronVisualiser getEducatedNeuron() {
