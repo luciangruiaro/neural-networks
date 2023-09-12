@@ -2,7 +2,7 @@ package ro.luciangruia.neuralnetworks.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-import ro.luciangruia.neuralnetworks.neuralNetwork.neuron.NeuronState;
+import ro.luciangruia.neuralnetworks.simpleNeuron.NeuronState;
 
 import java.io.BufferedReader;
 import java.io.IOException;

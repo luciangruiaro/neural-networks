@@ -1,7 +1,6 @@
 package ro.luciangruia.neuralnetworks.neuralNetwork;
 
 import org.springframework.stereotype.Service;
-import ro.luciangruia.neuralnetworks.neuralNetwork.network.NeuralNetwork;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_HIDDEN_LAYERS;

@@ -1,29 +1,22 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork.neuron;
-
-import org.springframework.stereotype.Component;
-import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
+package ro.luciangruia.neuralnetworks.neuralNetwork;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_OUTPUT_THRESHOLD;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
-import static ro.luciangruia.neuralnetworks.neuralNetwork.neuron.NeuronPrinter.printNeuronCreation;
-import static ro.luciangruia.neuralnetworks.neuralNetwork.neuron.NeuronPrinter.printNeuronState;
+import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoidDerivativeOfActivatedValue;
 
-@Component
 public class Neuron {
-
     public int noInputs;
     public double[] weights;
     public double bias = 1.0;
     public double biasWeight;
+    public double delta; // To store the error term
 
     public Neuron(int inputSize) {
         noInputs = inputSize;
         weights = new double[noInputs];
         initializeWeights(noInputs);
-        printCretion();
-        printState();
     }
 
     protected double inputSignal(double[] inputValues) {
@@ -57,28 +50,28 @@ public class Neuron {
         return output(inputValues) >= SN_OUTPUT_THRESHOLD ? 1 : 0;
     }
 
-    public void adjustWeights(double[] inputs, double expected, double prediction) {
-        for (int i = 0; i < noInputs; i++) {
-            weights[i] += gradientDescent(MathHelpers.gradient(inputs[i], expected, prediction));
+    protected double computeDeltaForOutput(double expected, double prediction) {
+        return (expected - prediction) * sigmoidDerivativeOfActivatedValue(prediction);
+    }
+
+    protected double computeDeltaForHidden(double[] inputs, double[] nextLayerDeltas, double[] nextLayerWeights) {
+        double weightedDeltaSum = 0;
+        for (int i = 0; i < nextLayerDeltas.length; i++) {
+            weightedDeltaSum += nextLayerDeltas[i] * nextLayerWeights[i];
         }
-        adjustBiasWeight(expected, prediction);
+        return weightedDeltaSum * sigmoidDerivativeOfActivatedValue(output(inputs));
     }
 
-    public void adjustBiasWeight(double expected, double prediction) {
-        biasWeight += gradientDescent(MathHelpers.gradient(1, expected, prediction));
+
+    // Adjust weights using the computed delta
+    public void adjustWeights(double[] inputs) {
+        for (int i = 0; i < noInputs; i++) {
+            weights[i] += gradientDescent(delta * inputs[i]);
+        }
+        adjustBiasWeight();
     }
 
-    protected void printState(double expected, double prediction) {
-        printNeuronState(this, expected, prediction);
+    public void adjustBiasWeight() {
+        biasWeight += gradientDescent(delta);
     }
-
-    protected void printState() {
-        printNeuronState(this);
-    }
-
-    protected void printCretion() {
-        printNeuronCreation(this);
-    }
-
 }
-

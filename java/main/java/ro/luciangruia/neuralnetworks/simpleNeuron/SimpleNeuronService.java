@@ -1,4 +1,4 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork.neuron;
+package ro.luciangruia.neuralnetworks.simpleNeuron;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
