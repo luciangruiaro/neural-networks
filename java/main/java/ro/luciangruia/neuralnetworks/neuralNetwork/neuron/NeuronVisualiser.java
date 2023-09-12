@@ -1,7 +1,6 @@
-package ro.luciangruia.neuralnetworks.simpleNeuron;
+package ro.luciangruia.neuralnetworks.neuralNetwork.neuron;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 @Data
 public class NeuronVisualiser {

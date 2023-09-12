@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ro.luciangruia.neuralnetworks.simpleNeuron.NeuronVisualiser;
-import ro.luciangruia.neuralnetworks.simpleNeuron.SimpleNeuronService;
+import ro.luciangruia.neuralnetworks.neuralNetwork.neuron.NeuronVisualiser;
+import ro.luciangruia.neuralnetworks.neuralNetwork.neuron.SimpleNeuronService;
 
 @Controller
 @RequestMapping("/neuron")

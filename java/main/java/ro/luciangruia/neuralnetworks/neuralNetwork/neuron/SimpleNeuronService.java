@@ -1,4 +1,4 @@
-package ro.luciangruia.neuralnetworks.simpleNeuron;
+package ro.luciangruia.neuralnetworks.neuralNetwork.neuron;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,6 @@ import java.util.List;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_EPOCHS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_INPUT_SIZE;
-import static ro.luciangruia.neuralnetworks.simpleNeuron.Test.testSingleNeuron;
-import static ro.luciangruia.neuralnetworks.simpleNeuron.Train.trainMoreEpochs;
 
 @Service
 public class SimpleNeuronService {
@@ -42,13 +40,13 @@ public class SimpleNeuronService {
     @SneakyThrows
     public NeuronVisualiser getEducatedNeuron() {
 
-        testSingleNeuron(newInput, singleNeuron, "initial");
+        Test.testSingleNeuron(newInput, singleNeuron, "initial");
 
-        neuronStates = trainMoreEpochs(trainingDataSet, expectedOutputs, singleNeuron, SN_EPOCHS);
+        neuronStates = Train.trainMoreEpochs(trainingDataSet, expectedOutputs, singleNeuron, SN_EPOCHS);
 
         pythonApi.pyPlotNeuronStates(neuronStates);
 
-        testSingleNeuron(newInput, singleNeuron, "after training");
+        Test.testSingleNeuron(newInput, singleNeuron, "after training");
 
         return new NeuronVisualiser(singleNeuron, newInput);
     }

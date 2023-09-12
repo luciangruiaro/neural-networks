@@ -11,6 +11,22 @@ public class MathHelpers {
         return x * (1 - x); // Assuming x is already sigmoid-activated
     }
 
+    public static double[] softmax(double[] logits) {
+        double[] result = new double[logits.length];
+        double sum = 0.0;
+
+        for (int i = 0; i < logits.length; i++) {
+            sum += Math.exp(logits[i]);
+        }
+
+        for (int i = 0; i < logits.length; i++) {
+            result[i] = Math.exp(logits[i]) / sum;
+        }
+
+        return result;
+    }
+
+
     public static double gradient(double inputValue, double expected, double prediction) {
         return inputValue * rawLoss(expected, prediction) * sigmoidDerivativeOfActivatedValue(prediction);
     }
