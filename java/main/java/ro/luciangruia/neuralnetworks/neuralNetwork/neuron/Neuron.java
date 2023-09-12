@@ -57,14 +57,14 @@ public class Neuron {
         return output(inputValues) >= SN_OUTPUT_THRESHOLD ? 1 : 0;
     }
 
-    protected void adjustWeights(double[] inputs, double expected, double prediction) {
+    public void adjustWeights(double[] inputs, double expected, double prediction) {
         for (int i = 0; i < noInputs; i++) {
             weights[i] += gradientDescent(MathHelpers.gradient(inputs[i], expected, prediction));
         }
         adjustBiasWeight(expected, prediction);
     }
 
-    private void adjustBiasWeight(double expected, double prediction) {
+    public void adjustBiasWeight(double expected, double prediction) {
         biasWeight += gradientDescent(MathHelpers.gradient(1, expected, prediction));
     }
 

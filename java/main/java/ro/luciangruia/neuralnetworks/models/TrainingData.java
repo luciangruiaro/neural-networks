@@ -1,5 +1,8 @@
 package ro.luciangruia.neuralnetworks.models;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TrainingData {
     private int[] input;
     private int expectedOutput;
