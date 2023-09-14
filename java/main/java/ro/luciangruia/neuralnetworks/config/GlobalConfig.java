@@ -11,6 +11,8 @@ public class GlobalConfig {
     public static int NEURAL_NETWORK_NO_HIDDEN_LAYERS = 2;
     public static int NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS = 16;
     public static int NEURAL_NETWORK_NO_NEURONS_OUTPUT = 10;
+    public static final int NN_EPOCHS = 50;
+    public static final double NN_LEARNING_RATE = 0.1;
 
     // PATHS
     public static final String DYNAMIC_PATH = System.getProperty("user.dir");

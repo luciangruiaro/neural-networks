@@ -50,19 +50,6 @@ public class Neuron {
         return output(inputValues) >= SN_OUTPUT_THRESHOLD ? 1 : 0;
     }
 
-    protected double computeDeltaForOutput(double expected, double prediction) {
-        return (expected - prediction) * sigmoidDerivativeOfActivatedValue(prediction);
-    }
-
-    protected double computeDeltaForHidden(double[] inputs, double[] nextLayerDeltas, double[] nextLayerWeights) {
-        double weightedDeltaSum = 0;
-        for (int i = 0; i < nextLayerDeltas.length; i++) {
-            weightedDeltaSum += nextLayerDeltas[i] * nextLayerWeights[i];
-        }
-        return weightedDeltaSum * sigmoidDerivativeOfActivatedValue(output(inputs));
-    }
-
-
     // Adjust weights using the computed delta
     public void adjustWeights(double[] inputs) {
         for (int i = 0; i < noInputs; i++) {
@@ -74,4 +61,8 @@ public class Neuron {
     public void adjustBiasWeight() {
         biasWeight += gradientDescent(delta);
     }
+
+
+
+
 }

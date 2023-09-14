@@ -50,6 +50,31 @@ public class MathHelpers {
         return result;
     }
 
+    public static int getMaxIndex(double[] softmaxOutput) {
+        int maxIndex = 0;
+        for (int i = 0; i < softmaxOutput.length; i++) {
+            if (softmaxOutput[i] > softmaxOutput[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
+    // compute delta for output layer
+    public static double computeDeltaForOutput(double expected, double prediction) {
+        return (expected - prediction) * sigmoidDerivativeOfActivatedValue(prediction);
+    }
+
+    public static double computeDeltaForHidden(double activatedInput, double[] nextLayerDeltas, double[] nextLayerWeights) {
+        double weightedDeltaSum = 0;
+        for (int i = 0; i < nextLayerDeltas.length; i++) {
+            weightedDeltaSum += nextLayerDeltas[i] * nextLayerWeights[i];
+        }
+        double derivative = sigmoidDerivativeOfActivatedValue(activatedInput);
+        return weightedDeltaSum * derivative;
+    }
+
+
     public static double[] gradient(double[] inputValues, double[] expected, double[] predictions) {
         if (inputValues.length != predictions.length || predictions.length != expected.length) {
             throw new IllegalArgumentException("Mismatch in length of inputValues, predictions, and expected.");
@@ -75,6 +100,17 @@ public class MathHelpers {
             loss -= expected[i] * Math.log(predicted[i]);
         }
         return loss;
+    }
+
+    public static double[] getInputsVector(int[][] inputsMatrix) {
+        double[] inputsVector = new double[inputsMatrix.length * inputsMatrix[0].length];
+        int index = 0;
+        for (int[] row : inputsMatrix) {
+            for (int value : row) {
+                inputsVector[index++] = value;
+            }
+        }
+        return inputsVector;
     }
 
 }
