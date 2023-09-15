@@ -1,9 +1,12 @@
 package ro.luciangruia.neuralnetworks.nn;
 
+import org.springframework.stereotype.Component;
+
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
 
+@Component
 public class Neuron {
     public int noInputs;
     public double[] weights;

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('Expected Output:', outputValue);
 
             // Send data to Spring backend
-            fetch('/train/submit', {
+            fetch('/test/submit', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify({

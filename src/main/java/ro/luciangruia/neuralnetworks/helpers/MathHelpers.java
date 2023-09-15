@@ -108,11 +108,11 @@ public class MathHelpers {
         return loss;
     }
 
-    public static double[] getInputsVector(int[][] inputsMatrix) {
+    public static double[] flattenMatrix(double[][] inputsMatrix) {
         double[] inputsVector = new double[inputsMatrix.length * inputsMatrix[0].length];
         int index = 0;
-        for (int[] row : inputsMatrix) {
-            for (int value : row) {
+        for (double[] row : inputsMatrix) {
+            for (double value : row) {
                 inputsVector[index++] = value;
             }
         }

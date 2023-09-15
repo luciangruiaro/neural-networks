@@ -28,12 +28,12 @@ public class NNController {
     @Autowired
     DataHelper dataHelper;
 
-    @GetMapping("/train")
+    @GetMapping("/test")
     public ModelAndView train() {
-        return new ModelAndView("train");
+        return new ModelAndView("test");
     }
 
-    @PostMapping("/train/submit")
+    @PostMapping("/test/submit")
     @ResponseBody
     public ResponseEntity<?> submitTrainingData(@RequestBody TrainingData data) {
         dataHelper.print1Dto2D(data.getInput());
