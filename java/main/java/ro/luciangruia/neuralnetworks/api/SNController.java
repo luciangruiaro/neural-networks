@@ -10,7 +10,7 @@ import ro.luciangruia.neuralnetworks.simpleNeuron.SimpleNeuronService;
 
 @Controller
 @RequestMapping("/neuron")
-public class SNeuronController {
+public class SNController {
 
     @Autowired
     SimpleNeuronService simpleNeuronService;

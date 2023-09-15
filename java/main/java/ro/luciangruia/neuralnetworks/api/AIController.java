@@ -10,12 +10,12 @@ import ro.luciangruia.neuralnetworks.openAI.Completion;
 
 @RestController
 @RequestMapping("/ai")
-public class AiController {
+public class AIController {
 
     private final AiClient aiClient;
 
     @Autowired
-    public AiController(AiClient aiClient) {
+    public AIController(AiClient aiClient) {
         this.aiClient = aiClient;
     }
 
