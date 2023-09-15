@@ -23,7 +23,7 @@ import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_OU
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Controller
-public class NeuralNetworkController {
+public class NNController {
 
     @Autowired
     DataHelper dataHelper;
