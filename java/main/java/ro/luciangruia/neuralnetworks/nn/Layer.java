@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_NEURONS_OUTPUT;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_OUTPUT;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Component
 public class Layer {
@@ -22,7 +22,7 @@ public class Layer {
     }
 
     private static int getNumberOfInputValues() {
-        return (int) Math.pow(NEURAL_NETWORK_INPUT_RESOLUTION, 2);
+        return (int) Math.pow(NN_INPUT_RESOLUTION, 2);
     }
 
     public static Layer createInputLayer() {
@@ -40,19 +40,19 @@ public class Layer {
     }
 
     public static int[] configureHiddenLayersLayout() {
-        int[] hiddenSizes = new int[NEURAL_NETWORK_NO_HIDDEN_LAYERS];
-        for (int i = 0; i < NEURAL_NETWORK_NO_HIDDEN_LAYERS; i++) {
-            hiddenSizes[i] = NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
+        int[] hiddenSizes = new int[NN_NO_HIDDEN_LAYERS];
+        for (int i = 0; i < NN_NO_HIDDEN_LAYERS; i++) {
+            hiddenSizes[i] = NN_NO_NEURONS_PER_HIDDEN_LAYERS;
         }
         return hiddenSizes;
     }
 
     public static Layer createOutputLayer() {
-        return new Layer(NEURAL_NETWORK_NO_NEURONS_OUTPUT, getNumberOfNeuronsOnLastHiddenLayer());
+        return new Layer(NN_NO_NEURONS_OUTPUT, getNumberOfNeuronsOnLastHiddenLayer());
     }
 
     private static int getNumberOfNeuronsOnLastHiddenLayer() {
-        return configureHiddenLayersLayout()[NEURAL_NETWORK_NO_HIDDEN_LAYERS - 1];
+        return configureHiddenLayersLayout()[NN_NO_HIDDEN_LAYERS - 1];
     }
 
     // This method computes the output for each neuron in the hidden or output layer for the given inputs

@@ -17,10 +17,10 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_NEURONS_OUTPUT;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_OUTPUT;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Controller
 public class NeuralNetworkController {
@@ -49,10 +49,10 @@ public class NeuralNetworkController {
 
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {
-        int noInputNeurons = (int) Math.pow(NEURAL_NETWORK_INPUT_RESOLUTION, 2);
-        int noHiddenLayers = NEURAL_NETWORK_NO_HIDDEN_LAYERS;
-        int noNeuronsPerHiddenLayer = NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
-        int noOutputNeurons = NEURAL_NETWORK_NO_NEURONS_OUTPUT;
+        int noInputNeurons = (int) Math.pow(NN_INPUT_RESOLUTION, 2);
+        int noHiddenLayers = NN_NO_HIDDEN_LAYERS;
+        int noNeuronsPerHiddenLayer = NN_NO_NEURONS_PER_HIDDEN_LAYERS;
+        int noOutputNeurons = NN_NO_NEURONS_OUTPUT;
         model.addAttribute("noInputNeurons", noInputNeurons);
         model.addAttribute("noHiddenLayers", noHiddenLayers);
         model.addAttribute("noNeuronsPerHiddenLayer", noNeuronsPerHiddenLayer);

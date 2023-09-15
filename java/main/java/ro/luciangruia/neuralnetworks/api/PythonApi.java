@@ -13,14 +13,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.RES_PYTHON_PATH;
 
 @Service
 public class PythonApi {
 
     public static void main(String[] args) {
-        pyGenerateTrainingData(NEURAL_NETWORK_INPUT_RESOLUTION);
+        pyGenerateTrainingData(NN_INPUT_RESOLUTION);
     }
 
     private static void pyGenerateTrainingData(int n) {
