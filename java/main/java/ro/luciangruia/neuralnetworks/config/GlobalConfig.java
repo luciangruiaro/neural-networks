@@ -24,10 +24,10 @@ public class GlobalConfig {
     }
 
     // NEURAL NETWORK CONFIG
-    public static int NN_INPUT_RESOLUTION = 28;
-    public static int NN_NO_HIDDEN_LAYERS = 2;
-    public static int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 16;
-    public static int NN_NO_NEURONS_OUTPUT = 10;
+    public static final int NN_INPUT_RESOLUTION = 28;
+    public static final int NN_NO_HIDDEN_LAYERS = 2;
+    public static final int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 16;
+    public static final int NN_NO_NEURONS_OUTPUT = 10;
     public static final int NN_EPOCHS = 50;
     public static final double NN_LEARNING_RATE = 0.1;
 

@@ -7,6 +7,9 @@ import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_LEARNING_RATE
 @Component
 public class MathHelpers {
 
+    private MathHelpers() {
+    }
+
     // Neuron helpers -----------------------------------------------
     public static double sigmoid(double x) {
         return 1 / (1 + Math.exp(-x));
@@ -29,7 +32,7 @@ public class MathHelpers {
     }
 
     public static double meanSquaredLoss(double expected, double prediction) {
-        return (1 / 2) * Math.pow(expected - prediction, 2);
+        return 0.5 * Math.pow(expected - prediction, 2);
     }
 
     public static double generateRandomWeight() {
@@ -43,6 +46,9 @@ public class MathHelpers {
         double sum = 0.0;
         for (int i = 0; i < logits.length; i++) {
             sum += Math.exp(logits[i]);
+        }
+        if (sum == 0.0) {
+            throw new ArithmeticException("Denominator 'sum' is zero in softmax computation.");
         }
         for (int i = 0; i < logits.length; i++) {
             result[i] = Math.exp(logits[i]) / sum;
