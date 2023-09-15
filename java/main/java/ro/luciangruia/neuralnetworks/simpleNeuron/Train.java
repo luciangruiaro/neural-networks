@@ -10,24 +10,24 @@ import java.util.List;
 @Slf4j
 public class Train {
 
-    private static final List<NeuronState> neuronStates = new ArrayList<>();
+    private static final List<SNState> snStates = new ArrayList<>();
 
-    protected static List<NeuronState> trainMoreEpochs(double[][] trainingDataSet, double[] expectedOutputs, SNeuron sNeuron, int epocsLimit) {
+    protected static List<SNState> trainMoreEpochs(double[][] trainingDataSet, double[] expectedOutputs, SNeuron sNeuron, int epocsLimit) {
         log.info("Start training for {} epochs...", epocsLimit);
         sNeuron.printState();
-        neuronStates.add(new NeuronState(sNeuron));
+        snStates.add(new SNState(sNeuron));
 
         for (int epoch = 0; epoch < epocsLimit; epoch++) {
             for (int i = 0; i < trainingDataSet.length; i++) {
                 train(trainingDataSet[i], expectedOutputs[i], sNeuron);
             }
-            neuronStates.add(new NeuronState(sNeuron));
+            snStates.add(new SNState(sNeuron));
         }
 
         log.info("Finished {} epochs! Training done.", epocsLimit);
         sNeuron.printState();
 
-        return neuronStates;
+        return snStates;
     }
 
     private static void train(double[] inputValues, double expectedValue, SNeuron sNeuron) {
@@ -36,6 +36,6 @@ public class Train {
         // Based on the prediction, calculate the loss and adjust the weights
         sNeuron.adjustWeights(inputValues, expectedValue, prediction);
         // Print the current state of the neuron
-        // singleNeuron.printState(expectedValue, singleNeuron.output(inputValues));
+        // sNeuron.printState(expectedValue, sNeuron.output(inputValues));
     }
 }

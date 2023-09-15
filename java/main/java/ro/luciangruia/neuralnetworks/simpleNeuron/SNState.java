@@ -3,11 +3,11 @@ package ro.luciangruia.neuralnetworks.simpleNeuron;
 import lombok.Data;
 
 @Data
-public class NeuronState {
+public class SNState {
     private final double[] weights;
     private final double biasWeight;
 
-    public NeuronState(SNeuron sNeuron) {
+    public SNState(SNeuron sNeuron) {
         this.weights = sNeuron.weights.clone();
         this.biasWeight = sNeuron.biasWeight;
     }

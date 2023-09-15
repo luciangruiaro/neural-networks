@@ -11,7 +11,7 @@ import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.meanSquaredLoss;
 
 @Service
 @Slf4j
-public class NeuronPrinter {
+public class SNPrinter {
 
     protected static void printNeuronState(SNeuron sNeuron, double expected, double prediction) {
         printNeuronState(sNeuron);

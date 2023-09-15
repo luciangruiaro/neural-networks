@@ -7,8 +7,8 @@ import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_OUTPUT_THRESH
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
-import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeuronCreation;
-import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeuronState;
+import static ro.luciangruia.neuralnetworks.simpleNeuron.SNPrinter.printNeuronCreation;
+import static ro.luciangruia.neuralnetworks.simpleNeuron.SNPrinter.printNeuronState;
 
 @Component
 public class SNeuron {

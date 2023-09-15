@@ -2,7 +2,7 @@ package ro.luciangruia.neuralnetworks.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-import ro.luciangruia.neuralnetworks.simpleNeuron.NeuronState;
+import ro.luciangruia.neuralnetworks.simpleNeuron.SNState;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +56,7 @@ public class PythonApi {
         }
     }
 
-    public static void pyPlotNeuronStates(List<NeuronState> neuronStates) throws IOException {
+    public static void pyPlotNeuronStates(List<SNState> neuronStates) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         Path filePath = Paths.get(RES_PYTHON_PATH + "/plots/neuronStates.json");
         String neuronStatesJson = objectMapper.writeValueAsString(neuronStates);
