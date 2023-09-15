@@ -1,6 +1,5 @@
 package ro.luciangruia.neuralnetworks.nn;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
@@ -10,8 +9,7 @@ import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PE
 @Service
 public class NNService {
 
-    @Autowired
-    NN neuralNetwork;
+    static NN nn = new NN();
 
     public static void main(String[] args) {
         // configure hidden layers
@@ -23,7 +21,7 @@ public class NNService {
     }
 
     public void testNN(double[][] inputsMatrix) {
-        TestNN.testSN(MathHelpers.flattenMatrix(inputsMatrix), neuralNetwork);
+        TestNN.testSN(MathHelpers.flattenMatrix(inputsMatrix), nn);
     }
 
 }

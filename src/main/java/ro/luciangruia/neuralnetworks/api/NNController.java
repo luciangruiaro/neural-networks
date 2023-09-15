@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ro.luciangruia.neuralnetworks.helpers.DataHelper;
 import ro.luciangruia.neuralnetworks.models.TrainingData;
+import ro.luciangruia.neuralnetworks.nn.NN;
+import ro.luciangruia.neuralnetworks.nn.NNService;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -28,18 +30,35 @@ public class NNController {
     @Autowired
     DataHelper dataHelper;
 
+    @Autowired
+    NNService nnService;
+
     @GetMapping("/test")
-    public ModelAndView train() {
+    public ModelAndView test() {
         return new ModelAndView("test");
     }
 
     @PostMapping("/test/submit")
+    @ResponseBody
+    public ResponseEntity<?> submitTestData(@RequestBody TrainingData data) {
+        dataHelper.print1Dto2D(data.getInput());
+        return ResponseEntity.ok("Data received successfully!");
+    }
+
+
+    @GetMapping("/train")
+    public ModelAndView train() {
+        return new ModelAndView("test");
+    }
+
+    @PostMapping("/train/submit")
     @ResponseBody
     public ResponseEntity<?> submitTrainingData(@RequestBody TrainingData data) {
         dataHelper.print1Dto2D(data.getInput());
         System.out.println("Expected Output: " + data.getExpectedOutput());
         return ResponseEntity.ok("Data received successfully!");
     }
+
 
     @GetMapping("/visualizeInputImage")
     public String visualizeGrid() {
@@ -49,6 +68,8 @@ public class NNController {
 
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {
+
+
         int noInputNeurons = (int) Math.pow(NN_INPUT_RESOLUTION, 2);
         int noHiddenLayers = NN_NO_HIDDEN_LAYERS;
         int noNeuronsPerHiddenLayer = NN_NO_NEURONS_PER_HIDDEN_LAYERS;

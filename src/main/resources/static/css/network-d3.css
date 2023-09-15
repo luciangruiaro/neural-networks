@@ -8,19 +8,19 @@ body {
 }
 
 .inputNeuron {
-    fill: #2db6c9;
+    fill: #0020bb;
 }
 
 .hiddenNeuron {
-    fill: #2db6c9;
+    fill: #0020bb;
 }
 
 .outputNeuron {
-    fill: #2db6c9;
+    fill: #0020bb;
 }
 
 .neuron {
-    fill: #2db6c9;
+    fill: #0020bb;
 }
 
 .line {

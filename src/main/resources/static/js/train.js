@@ -17,19 +17,38 @@ document.addEventListener("DOMContentLoaded", function () {
         inputGrid.appendChild(cell);
     }
 
+    // Generate output grid
+    const outputGrid = document.getElementById('outputGrid');
+    for (let i = 0; i < M; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('grid-cell');
+        cell.textContent = i;
+        cell.addEventListener('click', function () {
+            // Remove toggled class from all other cells
+            Array.from(outputGrid.children).forEach(c => c.classList.remove('toggled'));
+            cell.classList.add('toggled');
+        });
+        outputGrid.appendChild(cell);
+    }
+
+    // Set the first cell as toggled by default
+    outputGrid.firstChild.classList.add('toggled');
+
     // Submit button logic
     document.getElementById('submitBtn').addEventListener('click', function () {
         const inputValues = Array.from(inputGrid.children).map(cell => cell.classList.contains('toggled') ? 1 : 0);
+        const outputValue = Array.from(outputGrid.children).findIndex(cell => cell.classList.contains('toggled'));
 
         if (inputValues.includes(1)) {
             console.log('Input:', inputValues);
+            console.log('Expected Output:', outputValue);
 
             // Send data to Spring backend
-            fetch('/test/submit', {
+            fetch('/train/submit', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json'
                 }, body: JSON.stringify({
-                    input: inputValues
+                    input: inputValues, expectedOutput: outputValue
                 })
             }).then(response => response.json()).then(data => {
                 console.log(data);
