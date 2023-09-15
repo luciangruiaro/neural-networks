@@ -17,7 +17,7 @@ public class SimpleNeuronService {
     @Autowired
     PythonApi pythonApi;
 
-    static Neuron singleNeuron = new Neuron(SN_INPUT_SIZE);
+    static SNeuron singleSNeuron = new SNeuron(SN_INPUT_SIZE);
 
     private static List<NeuronState> neuronStates = new ArrayList<>();
 
@@ -40,18 +40,18 @@ public class SimpleNeuronService {
     @SneakyThrows
     public NeuronVisualiser getEducatedNeuron() {
 
-        Test.testSingleNeuron(newInput, singleNeuron, "initial");
+        Test.testSingleNeuron(newInput, singleSNeuron, "initial");
 
-        neuronStates = Train.trainMoreEpochs(trainingDataSet, expectedOutputs, singleNeuron, SN_EPOCHS);
+        neuronStates = Train.trainMoreEpochs(trainingDataSet, expectedOutputs, singleSNeuron, SN_EPOCHS);
 
         pythonApi.pyPlotNeuronStates(neuronStates);
 
-        Test.testSingleNeuron(newInput, singleNeuron, "after training");
+        Test.testSingleNeuron(newInput, singleSNeuron, "after training");
 
-        return new NeuronVisualiser(singleNeuron, newInput);
+        return new NeuronVisualiser(singleSNeuron, newInput);
     }
 
     public NeuronVisualiser getJustCreatedNeuron() {
-        return new NeuronVisualiser(singleNeuron, newInput);
+        return new NeuronVisualiser(singleSNeuron, newInput);
     }
 }

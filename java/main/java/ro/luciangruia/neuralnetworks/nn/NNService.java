@@ -1,4 +1,4 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork;
+package ro.luciangruia.neuralnetworks.nn;
 
 import org.springframework.stereotype.Service;
 
@@ -6,7 +6,7 @@ import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_N
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Service
-public class NeuralNetworkService {
+public class NNService {
 
     public static void main(String[] args) {
 
@@ -16,7 +16,7 @@ public class NeuralNetworkService {
             hiddenSizes[i] = NEURAL_NETWORK_NO_NEURONS_PER_HIDDEN_LAYERS;
         }
 
-        NeuralNetwork neuralNetwork = new NeuralNetwork();
+        NN neuralNetwork = new NN();
 
     }
 }

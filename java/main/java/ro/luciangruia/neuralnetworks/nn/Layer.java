@@ -1,7 +1,6 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork;
+package ro.luciangruia.neuralnetworks.nn;
 
 import org.springframework.stereotype.Component;
-import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
 import java.util.ArrayList;
 import java.util.List;

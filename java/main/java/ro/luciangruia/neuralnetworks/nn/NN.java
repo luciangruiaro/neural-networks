@@ -1,17 +1,17 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork;
+package ro.luciangruia.neuralnetworks.nn;
 
 import org.springframework.stereotype.Component;
 import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
 import java.util.List;
 
-import static ro.luciangruia.neuralnetworks.neuralNetwork.Layer.calculateOutputsForLayer;
-import static ro.luciangruia.neuralnetworks.neuralNetwork.Layer.createHiddenLayers;
-import static ro.luciangruia.neuralnetworks.neuralNetwork.Layer.createInputLayer;
-import static ro.luciangruia.neuralnetworks.neuralNetwork.Layer.createOutputLayer;
+import static ro.luciangruia.neuralnetworks.nn.Layer.calculateOutputsForLayer;
+import static ro.luciangruia.neuralnetworks.nn.Layer.createHiddenLayers;
+import static ro.luciangruia.neuralnetworks.nn.Layer.createInputLayer;
+import static ro.luciangruia.neuralnetworks.nn.Layer.createOutputLayer;
 
 @Component
-public class NeuralNetwork {
+public class NN {
 
 
     public Layer inputLayer;
@@ -20,7 +20,7 @@ public class NeuralNetwork {
     public double[][] hiddenLayerOutputs;
     public double[] outputLayerOutputs;
 
-    public NeuralNetwork() {
+    public NN() {
         inputLayer = createInputLayer();
         hiddenLayers = createHiddenLayers();
         outputLayer = createOutputLayer();
@@ -51,13 +51,13 @@ public class NeuralNetwork {
         backwardPassCalculation(this);
     }
 
-    public static void updateDeltasOutputLayer(double[] expectedOutputs, double[] outputLayerOutputs, NeuralNetwork network) {
+    public static void updateDeltasOutputLayer(double[] expectedOutputs, double[] outputLayerOutputs, NN network) {
         for (int j = 0; j < network.outputLayer.neurons.length; j++) {
             network.outputLayer.neurons[j].delta = MathHelpers.computeDeltaForOutput(expectedOutputs[j], outputLayerOutputs[j]);
         }
     }
 
-    public static void backwardPassCalculation(NeuralNetwork network) {
+    public static void backwardPassCalculation(NN network) {
         for (int i = network.hiddenLayers.size() - 1; i >= 0; i--) {
             Layer hiddenLayer = network.hiddenLayers.get(i);
             Layer nextLayer = (i == network.hiddenLayers.size() - 1) ? network.outputLayer : network.hiddenLayers.get(i + 1);
@@ -65,7 +65,7 @@ public class NeuralNetwork {
         }
     }
 
-    private static void updateDeltasHiddenLayers(int layerIndex, Layer hiddenLayer, Layer nextLayer, NeuralNetwork network) {
+    private static void updateDeltasHiddenLayers(int layerIndex, Layer hiddenLayer, Layer nextLayer, NN network) {
         for (int j = 0; j < hiddenLayer.neurons.length; j++) {
             double[] nextLayerDeltas = new double[nextLayer.neurons.length];
             double[] nextLayerWeights = new double[nextLayer.neurons.length];

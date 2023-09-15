@@ -1,6 +1,4 @@
-package ro.luciangruia.neuralnetworks.neuralNetwork;
-
-import org.springframework.stereotype.Component;
+package ro.luciangruia.neuralnetworks.nn;
 
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;

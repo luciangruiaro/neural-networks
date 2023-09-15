@@ -9,10 +9,10 @@ import java.util.Arrays;
 @Slf4j
 public class Test {
 
-    public static void testSingleNeuron(double[] newInput, Neuron singleNeuron, String testContext) {
+    public static void testSingleNeuron(double[] newInput, SNeuron sNeuron, String testContext) {
         log.info("Test context: {}", testContext);
-        log.info("Prediction for {} ==> {} [{}]", Arrays.toString(newInput), singleNeuron.classify(newInput), singleNeuron.output(newInput));
-        singleNeuron.printState();
+        log.info("Prediction for {} ==> {} [{}]", Arrays.toString(newInput), sNeuron.classify(newInput), sNeuron.output(newInput));
+        sNeuron.printState();
     }
 
 }

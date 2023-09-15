@@ -11,14 +11,14 @@ import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeur
 import static ro.luciangruia.neuralnetworks.simpleNeuron.NeuronPrinter.printNeuronState;
 
 @Component
-public class Neuron {
+public class SNeuron {
 
     public int noInputs;
     public double[] weights;
     public double bias = 1.0;
     public double biasWeight;
 
-    public Neuron(int inputSize) {
+    public SNeuron(int inputSize) {
         noInputs = inputSize;
         weights = new double[noInputs];
         initializeWeights(noInputs);

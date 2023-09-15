@@ -12,29 +12,29 @@ public class Train {
 
     private static final List<NeuronState> neuronStates = new ArrayList<>();
 
-    protected static List<NeuronState> trainMoreEpochs(double[][] trainingDataSet, double[] expectedOutputs, Neuron singleNeuron, int epocsLimit) {
+    protected static List<NeuronState> trainMoreEpochs(double[][] trainingDataSet, double[] expectedOutputs, SNeuron sNeuron, int epocsLimit) {
         log.info("Start training for {} epochs...", epocsLimit);
-        singleNeuron.printState();
-        neuronStates.add(new NeuronState(singleNeuron));
+        sNeuron.printState();
+        neuronStates.add(new NeuronState(sNeuron));
 
         for (int epoch = 0; epoch < epocsLimit; epoch++) {
             for (int i = 0; i < trainingDataSet.length; i++) {
-                train(trainingDataSet[i], expectedOutputs[i], singleNeuron);
+                train(trainingDataSet[i], expectedOutputs[i], sNeuron);
             }
-            neuronStates.add(new NeuronState(singleNeuron));
+            neuronStates.add(new NeuronState(sNeuron));
         }
 
         log.info("Finished {} epochs! Training done.", epocsLimit);
-        singleNeuron.printState();
+        sNeuron.printState();
 
         return neuronStates;
     }
 
-    private static void train(double[] inputValues, double expectedValue, Neuron singleNeuron) {
+    private static void train(double[] inputValues, double expectedValue, SNeuron sNeuron) {
         // Make a prediction with the current state of the neuron
-        double prediction = singleNeuron.output(inputValues);
+        double prediction = sNeuron.output(inputValues);
         // Based on the prediction, calculate the loss and adjust the weights
-        singleNeuron.adjustWeights(inputValues, expectedValue, prediction);
+        sNeuron.adjustWeights(inputValues, expectedValue, prediction);
         // Print the current state of the neuron
         // singleNeuron.printState(expectedValue, singleNeuron.output(inputValues));
     }
