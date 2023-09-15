@@ -1,10 +1,10 @@
 package ro.luciangruia.neuralnetworks.neuralNetwork;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_OUTPUT_THRESHOLD;
+import org.springframework.stereotype.Component;
+
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
-import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoidDerivativeOfActivatedValue;
 
 public class Neuron {
     public int noInputs;
@@ -46,10 +46,6 @@ public class Neuron {
         return activationFunction(inputSignal(inputValues));
     }
 
-    protected double classify(double[] inputValues) {
-        return output(inputValues) >= SN_OUTPUT_THRESHOLD ? 1 : 0;
-    }
-
     // Adjust weights using the computed delta
     public void adjustWeights(double[] inputs) {
         for (int i = 0; i < noInputs; i++) {
@@ -61,8 +57,6 @@ public class Neuron {
     public void adjustBiasWeight() {
         biasWeight += gradientDescent(delta);
     }
-
-
 
 
 }
