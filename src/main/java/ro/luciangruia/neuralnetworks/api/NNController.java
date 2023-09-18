@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ro.luciangruia.neuralnetworks.helpers.DataHelper;
 import ro.luciangruia.neuralnetworks.models.TrainingData;
-import ro.luciangruia.neuralnetworks.nn.NN;
 import ro.luciangruia.neuralnetworks.nn.NNService;
 
 import java.util.Arrays;
@@ -19,9 +18,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_OUTPUT;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Controller
@@ -32,6 +31,13 @@ public class NNController {
 
     @Autowired
     NNService nnService;
+
+
+    @GetMapping("/visualizeInputImage")
+    public String visualizeGrid() {
+        return "visualizeInputImage";
+    }
+
 
     @GetMapping("/test")
     public ModelAndView test() {
@@ -60,20 +66,14 @@ public class NNController {
     }
 
 
-    @GetMapping("/visualizeInputImage")
-    public String visualizeGrid() {
-        return "visualizeInputImage";
-    }
-
-
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {
 
 
-        int noInputNeurons = (int) Math.pow(NN_INPUT_RESOLUTION, 2);
+        int noInputNeurons = NN_INPUT_NEURONS;
         int noHiddenLayers = NN_NO_HIDDEN_LAYERS;
         int noNeuronsPerHiddenLayer = NN_NO_NEURONS_PER_HIDDEN_LAYERS;
-        int noOutputNeurons = NN_NO_NEURONS_OUTPUT;
+        int noOutputNeurons = NN_OUTPUT_NEURONS;
         model.addAttribute("noInputNeurons", noInputNeurons);
         model.addAttribute("noHiddenLayers", noHiddenLayers);
         model.addAttribute("noNeuronsPerHiddenLayer", noNeuronsPerHiddenLayer);

@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("r", neuronRadius)
         .style("fill", "#0020bb");
     const neuronOutputText = svg.append("text")
+        .attr("fill", activated ? "black" : "white")
         .attr("x", neuronX)
         .attr("y", neuronY)
         .attr("dy", "-0.35em")

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neural Network Visualization with D3.js</title>
+    <title>Neural Network Visualization</title>
     <link rel="stylesheet" href="css/network-d3.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
@@ -13,7 +13,6 @@
 <input type="hidden" id="noHiddenLayers" th:value="${noHiddenLayers}"/>
 <input type="hidden" id="noNeuronsPerHiddenLayer" th:value="${noNeuronsPerHiddenLayer}"/>
 <input type="hidden" id="noOutputNeurons" th:value="${noOutputNeurons}"/>
-<!-- Hidden element to store neuron values from Java -->
 <input type="hidden" id="inputNeuronValues" th:value="${inputNeuronValues}"/>
 <input type="hidden" id="hiddenNeuronValues" th:value="${hiddenNeuronValues}"/>
 <input type="hidden" id="outputNeuronValues" th:value="${outputNeuronValues}"/>

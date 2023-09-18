@@ -13,19 +13,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.RES_PYTHON_PATH;
 
 @Service
 public class PythonApi {
 
     public static void main(String[] args) {
-        pyGenerateTrainingData(NN_INPUT_RESOLUTION);
+        pyGenerateTrainingData(NN_INPUT_NEURONS);
     }
 
     private static void pyGenerateTrainingData(int n) {
         // invoke the python script
-        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/generate_training_data.py", "--n", String.valueOf(n)).redirectErrorStream(true);
+        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/generate_training_data.py", "--n", String.valueOf(Math.sqrt(n))).redirectErrorStream(true);
 
         try {
             Process process = processBuilder.start();

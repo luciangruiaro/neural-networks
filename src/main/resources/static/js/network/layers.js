@@ -2,7 +2,7 @@ function drawInputNeurons() {
     // Draw Input Neurons
     if (noInputNeurons <= noMaxNeuronsDisplay) {
         for (let i = 0; i < noInputNeurons; i++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron inputNeuron")
                 .attr("cx", neuronRadius * 2)
                 .attr("cy", 2 * neuronRadius + (i + 1) * neuronGap)  // Adjusted for padding
@@ -11,14 +11,14 @@ function drawInputNeurons() {
     } else {
         // Draw the first neurons
         for (let i = 0; i < ((noMaxNeuronsDisplay - 1) / 2); i++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron inputNeuron")
                 .attr("cx", neuronRadius * 2)
                 .attr("cy", 2 * neuronRadius + (i + 1) * neuronGap)  // Adjusted for padding
                 .attr("r", neuronRadius);
         }
         // Draw the ellipsis
-        svg.append("text")
+        circleGroup.append("text")
             .attr("x", neuronRadius * 2)
             .attr("y", 2 * neuronRadius + (((noMaxNeuronsDisplay - 1) / 2) + 1) * neuronGap)  // Position it after the 8th neuron
             .attr("dy", "0.35em")  // to vertically center the text
@@ -28,7 +28,7 @@ function drawInputNeurons() {
             .attr("fill", "black");
         // Draw the last neurons
         for (let i = 0; i < ((noMaxNeuronsDisplay - 1) / 2); i++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron inputNeuron")
                 .attr("cx", neuronRadius * 2)
                 .attr("cy", 2 * neuronRadius + (i + 8) * neuronGap)  // Adjusted for padding and ellipsis
@@ -43,7 +43,7 @@ function drawHiddenLayerNeurons(p) {
 
     if (noNeuronsPerHiddenLayer <= noMaxNeuronsDisplayHiddenLayers) {
         for (let m = 0; m < noNeuronsPerHiddenLayer; m++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron hiddenNeuron")
                 .attr("cx", (p + 2) * layerGap)
                 .attr("cy", 2 * neuronRadius + centerY + (m - noNeuronsPerHiddenLayer / 2) * neuronGap)  // Adjusted for padding
@@ -52,14 +52,14 @@ function drawHiddenLayerNeurons(p) {
     } else {
         // Draw the first neurons
         for (let m = 0; m < ((noMaxNeuronsDisplayHiddenLayers - 1) / 2); m++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron hiddenNeuron")
                 .attr("cx", (p + 2) * layerGap)
                 .attr("cy", 2 * neuronRadius + centerYAdjusted + (m - (noMaxNeuronsDisplayHiddenLayers - 1) / 2) * neuronGap)  // Adjusted for padding
                 .attr("r", neuronRadius);
         }
         // Draw the ellipsis
-        svg.append("text")
+        circleGroup.append("text")
             .attr("x", (p + 2) * layerGap)
             .attr("y", 2 * neuronRadius + centerYAdjusted)  // Position it at the center
             .attr("dy", "0.35em")  // to vertically center the text
@@ -69,7 +69,7 @@ function drawHiddenLayerNeurons(p) {
             .attr("fill", "black");
         // Draw the last neurons
         for (let m = 0; m < ((noMaxNeuronsDisplayHiddenLayers - 1) / 2); m++) {
-            svg.append("circle")
+            circleGroup.append("circle")
                 .attr("class", "neuron hiddenNeuron")
                 .attr("cx", (p + 2) * layerGap)
                 .attr("cy", 2 * neuronRadius + centerYAdjusted + (m + 1) * neuronGap)  // Adjusted for padding and ellipsis
@@ -80,7 +80,7 @@ function drawHiddenLayerNeurons(p) {
 
 function drawOutputNeurons() {
     // Draw Output Neurons
-    svg.selectAll(".outputNeuron")
+    circleGroup.selectAll(".outputNeuron")
         .data(outputNeuronValues)
         .enter()
         .append("circle")

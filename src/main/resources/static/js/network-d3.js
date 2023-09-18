@@ -31,6 +31,9 @@ const svg = d3.select("#network")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
+const lineGroup = svg.append("g").attr("id", "lineGroup");
+const circleGroup = svg.append("g").attr("id", "circleGroup");
+
 // Layers
 drawLayers();
 // Synapses
@@ -38,4 +41,5 @@ drawSynapses();
 // Neurons
 drawNeuronValues();
 drawOutputNeuronsLabels();
+highlightHiddenNeurons();
 highlightOutputNeuron();

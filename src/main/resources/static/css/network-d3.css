@@ -1,14 +1,14 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Lexend, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;*/
     background-color: #f4f4f4;
 }
 
 .inputNeuron {
-    fill: #0020bb;
+    fill: #f0efec;
 }
 
 .hiddenNeuron {
@@ -25,7 +25,7 @@ body {
 
 .line {
     stroke: rgba(112, 112, 112, 0.93);
-    stroke-width: 1px;
+    stroke-width: 0.5px;
 }
 
 text {

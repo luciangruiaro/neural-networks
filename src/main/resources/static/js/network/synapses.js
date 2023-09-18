@@ -4,7 +4,7 @@ function connectLayers(layer1, layer2) {
         const fromNeuron = d3.select(this);
         layer2.each(function () {
             const toNeuron = d3.select(this);
-            svg.append("line")
+            lineGroup.append("line")
                 .attr("class", "line")
                 .attr("x1", fromNeuron.attr("cx"))
                 .attr("y1", fromNeuron.attr("cy"))

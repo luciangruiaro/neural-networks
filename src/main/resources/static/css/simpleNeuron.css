@@ -1,3 +1,10 @@
+body {
+    font-family: Lexend, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .input-circle {
     fill: rgb(189, 189, 189);
 }

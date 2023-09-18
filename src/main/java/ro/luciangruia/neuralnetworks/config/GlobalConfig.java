@@ -24,10 +24,10 @@ public class GlobalConfig {
     }
 
     // NEURAL NETWORK CONFIG
-    public static final int NN_INPUT_RESOLUTION = 1; // 28x28 pixels
-    public static final int NN_NO_HIDDEN_LAYERS = 1; // 2 hidden layers
-    public static final int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 1; // 16 neurons per hidden layer
-    public static final int NN_NO_NEURONS_OUTPUT = 10; // 10 output neurons
+    public static final int NN_INPUT_NEURONS = 784; // 28x28 pixels
+    public static final int NN_NO_HIDDEN_LAYERS = 6; // 2 hidden layers
+    public static final int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 16; // 16 neurons per hidden layer
+    public static final int NN_OUTPUT_NEURONS = 10; // 10 output neurons
     public static final int NN_EPOCHS = 50; // 50 epochs
     public static final double NN_LEARNING_RATE = 0.1;
 

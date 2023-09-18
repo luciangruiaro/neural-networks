@@ -4,7 +4,7 @@ function drawNeuronValues() {
         .each(function (d, i) {
             const neuron = d3.select(this);
             const value = inputNeuronValues[i];
-            drawValueForNeuron(neuron, value);
+            drawValueForNeuron(neuron, value, "inputNeuronValue");
         });
 
     // Draw values for hidden neurons
@@ -12,7 +12,7 @@ function drawNeuronValues() {
         .each(function (d, i) {
             const neuron = d3.select(this);
             const value = hiddenNeuronValues[i];
-            drawValueForNeuron(neuron, value);
+            drawValueForNeuron(neuron, value, "hiddenNeuronValue");
         });
 
     // Draw values for output neurons
@@ -20,21 +20,22 @@ function drawNeuronValues() {
         .each(function (d, i) {
             const neuron = d3.select(this);
             const value = outputNeuronValues[i];
-            drawValueForNeuron(neuron, value);
+            drawValueForNeuron(neuron, value, "outputNeuronValue");
         });
 }
 
-function drawValueForNeuron(neuron, value) {
+function drawValueForNeuron(neuron, value, className) {
     const x = parseFloat(neuron.attr("cx"));
     const y = parseFloat(neuron.attr("cy"));
     svg.append("text")
+        .attr("class", className)
         .attr("x", x)
         .attr("y", y)
         .attr("dy", "0.35em")  // to vertically center the text
         .attr("text-anchor", "middle")
         .text(value.toFixed(2))
         .attr("font-size", "10px")
-        .attr("fill", "white");
+        .attr("fill", "white")
 }
 
 
@@ -57,15 +58,33 @@ function drawOutputNeuronsLabels() {
                 .attr("text-anchor", "start")
                 .text(i)  // The number corresponding to the neuron
                 .attr("font-size", "14px")
-                .attr("fill", "black");
+                .attr("fill", "black")
         });
+}
+
+const transitionDuration = 2000; // duration of the transition animation
+
+function highlightHiddenNeurons() {
+    // Change the neuron color
+    const selectedNeuron = svg.selectAll(".hiddenNeuron")
+        .filter((d, i) => hiddenNeuronValues[i] >= 0.5);
+    selectedNeuron.transition().duration(transitionDuration).style("fill", "#00ffbe");
+    // Filter and highlight hidden neurons with values >= 0.5
+    svg.selectAll(".hiddenNeuronValue")
+        .filter((d, i) => hiddenNeuronValues[i] >= 0.5)
+        .transition().duration(transitionDuration).style("fill", "black");
 }
 
 function highlightOutputNeuron() {
     // Find the max output neuron value and its index
     const maxOutputValue = Math.max(...outputNeuronValues);
     const maxOutputValueIndex = outputNeuronValues.indexOf(maxOutputValue);
+    // Change the neuron color
     const selectedNeuron = svg.selectAll(".outputNeuron")
         .filter((d, i) => i === maxOutputValueIndex);
-    selectedNeuron.style("fill", "red");
+    selectedNeuron.transition().duration(transitionDuration + 2000).style("fill", "#00ffbe");
+    // Change the text color of the neuron with the highest value
+    const selectedNeuronText = svg.selectAll(".outputNeuronValue")
+        .filter((d, i) => i === maxOutputValueIndex);
+    selectedNeuronText.transition().duration(transitionDuration + 2000).style("fill", "black");
 }

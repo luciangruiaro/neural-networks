@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_RESOLUTION;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_OUTPUT;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
 
 @Component
@@ -22,7 +22,7 @@ public class Layer {
     }
 
     private static int getNumberOfInputValues() {
-        return (int) Math.pow(NN_INPUT_RESOLUTION, 2);
+        return NN_INPUT_NEURONS;
     }
 
     public static Layer createInputLayer() {
@@ -48,7 +48,7 @@ public class Layer {
     }
 
     public static Layer createOutputLayer() {
-        return new Layer(NN_NO_NEURONS_OUTPUT, getNumberOfNeuronsOnLastHiddenLayer());
+        return new Layer(NN_OUTPUT_NEURONS, getNumberOfNeuronsOnLastHiddenLayer());
     }
 
     private static int getNumberOfNeuronsOnLastHiddenLayer() {
