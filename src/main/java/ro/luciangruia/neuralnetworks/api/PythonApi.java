@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.PYTHON_VENV_COMMAND;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.RES_PYTHON_PATH;
 
 @Service
@@ -25,7 +26,7 @@ public class PythonApi {
 
     private static void pyGenerateTrainingData(int n) {
         // invoke the python script
-        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/generate_training_data.py", "--n", String.valueOf(Math.sqrt(n))).redirectErrorStream(true);
+        ProcessBuilder processBuilder = new ProcessBuilder(PYTHON_VENV_COMMAND, RES_PYTHON_PATH + "/training_data/generate_training_data.py", "--n", String.valueOf((int) Math.sqrt(n))).redirectErrorStream(true);
 
         try {
             Process process = processBuilder.start();
@@ -63,7 +64,7 @@ public class PythonApi {
         Files.write(filePath, neuronStatesJson.getBytes(StandardCharsets.UTF_8));
 
         // invoke the python script
-        ProcessBuilder processBuilder = new ProcessBuilder("python", RES_PYTHON_PATH + "/plots/neuron_evolution.py ", filePath.toString());
+        ProcessBuilder processBuilder = new ProcessBuilder(PYTHON_VENV_COMMAND, RES_PYTHON_PATH + "/plots/neuron_evolution.py ", filePath.toString());
         processBuilder.start();
     }
 }

@@ -11,6 +11,7 @@ public class GlobalConfig {
     public static final String RES_PYTHON_PATH = DYNAMIC_PATH + "/python";
     public static final String RES_JS_PATH = DYNAMIC_PATH + "/static/js";
     public static final String RES_CSS_PATH = DYNAMIC_PATH + "/static/css";
+    public static final String PYTHON_VENV_COMMAND = "C:\\Users\\gruia\\Desktop\\Ciklum\\AI-experiments\\neural-networks\\venv\\Scripts\\python.exe";
 
     // SIMPLE NEURON CONFIG
     public static final double SN_OUTPUT_THRESHOLD = 0.5;
@@ -24,8 +25,8 @@ public class GlobalConfig {
     }
 
     // NEURAL NETWORK CONFIG
-    public static final int NN_INPUT_NEURONS = 784; // 28x28 pixels
-    public static final int NN_NO_HIDDEN_LAYERS = 6; // 2 hidden layers
+    public static final int NN_INPUT_NEURONS = 784; // 784 = 28x28 pixels
+    public static final int NN_NO_HIDDEN_LAYERS = 2; // 2 hidden layers
     public static final int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 16; // 16 neurons per hidden layer
     public static final int NN_OUTPUT_NEURONS = 10; // 10 output neurons
     public static final int NN_EPOCHS = 50; // 50 epochs

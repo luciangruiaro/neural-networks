@@ -21,7 +21,7 @@ def generate_nxn_digit(n=28):
     img_resized = resize(img, (n, n), mode='reflect', anti_aliasing=True)
 
     # Binarize the image
-    threshold = 0.6
+    threshold = 0.5
     binarized_img = (img_resized > threshold).astype(int)
 
     print(binarized_img)
