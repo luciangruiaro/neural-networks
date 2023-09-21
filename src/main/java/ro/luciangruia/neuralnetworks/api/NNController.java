@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ro.luciangruia.neuralnetworks.helpers.DataHelper;
 import ro.luciangruia.neuralnetworks.models.TrainingData;
+import ro.luciangruia.neuralnetworks.nn.NN;
 import ro.luciangruia.neuralnetworks.nn.NNService;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -20,8 +22,8 @@ import java.util.stream.IntStream;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 
 @Controller
 public class NNController {
@@ -32,6 +34,9 @@ public class NNController {
     @Autowired
     NNService nnService;
 
+    @Autowired
+    private NN nn;
+
 
     @GetMapping("/visualizeInputImage")
     public String visualizeGrid() {
@@ -39,22 +44,11 @@ public class NNController {
     }
 
 
-    @GetMapping("/test")
-    public ModelAndView test() {
-        return new ModelAndView("test");
-    }
-
-    @PostMapping("/test/submit")
-    @ResponseBody
-    public ResponseEntity<?> submitTestData(@RequestBody TrainingData data) {
-        dataHelper.print1Dto2D(data.getInput());
-        return ResponseEntity.ok("Data received successfully!");
-    }
-
-
     @GetMapping("/train")
-    public ModelAndView train() {
-        return new ModelAndView("test");
+    @ResponseBody
+    public String train() throws IOException {
+        nnService.trainNN(nn);
+        return "Training done...";
     }
 
     @PostMapping("/train/submit")
@@ -65,33 +59,44 @@ public class NNController {
         return ResponseEntity.ok("Data received successfully!");
     }
 
+    @GetMapping("/test")
+    public ModelAndView test() {
+        return new ModelAndView("test");
+    }
+
+    @PostMapping("/test/submit")
+    @ResponseBody
+    public ResponseEntity<?> submitTestData(@RequestBody TrainingData data) {
+        dataHelper.print1Dto2D(data.getInput());
+        nnService.testNN(dataHelper.transform1Dto2D(data.getInput()));
+        return ResponseEntity.ok("Data received successfully!");
+    }
+
 
     @GetMapping("/network-d3")
     public String viewNetworkD3(Model model) {
 
 
-        int noInputNeurons = NN_INPUT_NEURONS;
-        int noHiddenLayers = NN_NO_HIDDEN_LAYERS;
-        int noNeuronsPerHiddenLayer = NN_NO_NEURONS_PER_HIDDEN_LAYERS;
-        int noOutputNeurons = NN_OUTPUT_NEURONS;
-        model.addAttribute("noInputNeurons", noInputNeurons);
-        model.addAttribute("noHiddenLayers", noHiddenLayers);
-        model.addAttribute("noNeuronsPerHiddenLayer", noNeuronsPerHiddenLayer);
-        model.addAttribute("noOutputNeurons", noOutputNeurons);
+        model.addAttribute("noInputNeurons", NN_INPUT_NEURONS);
+        model.addAttribute("noHiddenLayers", NN_NO_HIDDEN_LAYERS);
+        model.addAttribute("noNeuronsPerHiddenLayer", NN_NO_NEURONS_PER_HIDDEN_LAYERS);
+        model.addAttribute("noOutputNeurons", NN_OUTPUT_NEURONS);
 
-        Random rand = new Random(); // TODO replace with NN weights
-        int totalNeurons = noInputNeurons + noHiddenLayers * noNeuronsPerHiddenLayer + noOutputNeurons;
         // values for input layer
-        double[] inputNeuronsValuesArray = IntStream.range(0, noInputNeurons).mapToDouble(i -> Math.round(rand.nextDouble() * 100.0) / 100.0).toArray();
+        double[] inputNeuronsValuesArray = IntStream.range(0, NN_INPUT_NEURONS).mapToDouble(i -> Math.round(new Random().nextDouble() * 100.0) / 100.0).toArray();
         String inputNeuronValues = Arrays.stream(inputNeuronsValuesArray).mapToObj(Double::toString).collect(Collectors.joining(","));
         model.addAttribute("inputNeuronValues", inputNeuronValues);
-        // values for input layer
-        double[] hiddenNeuronsValuesArray = IntStream.range(0, noHiddenLayers * noNeuronsPerHiddenLayer).mapToDouble(i -> Math.round(rand.nextDouble() * 100.0) / 100.0).toArray();
-        String hiddenNeuronValues = Arrays.stream(hiddenNeuronsValuesArray).mapToObj(Double::toString).collect(Collectors.joining(","));
+
+        // values for hidden layer
+        String hiddenNeuronValues = Arrays.stream(nn.hiddenLayerOutputs)
+                .flatMapToDouble(Arrays::stream)
+                .mapToObj(Double::toString)
+                .collect(Collectors.joining(","));
         model.addAttribute("hiddenNeuronValues", hiddenNeuronValues);
-        // values for input layer
-        double[] outputNeuronsValuesArray = IntStream.range(0, noOutputNeurons).mapToDouble(i -> Math.round(rand.nextDouble() * 100.0) / 100.0).toArray();
-        String outputNeuronValues = Arrays.stream(outputNeuronsValuesArray).mapToObj(Double::toString).collect(Collectors.joining(","));
+        // values for output layer
+        String outputNeuronValues = Arrays.stream(nn.outputLayerOutputs)
+                .mapToObj(Double::toString)
+                .collect(Collectors.joining(","));
         model.addAttribute("outputNeuronValues", outputNeuronValues);
 
         return "network-d3";

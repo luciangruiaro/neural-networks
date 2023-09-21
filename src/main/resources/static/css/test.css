@@ -30,12 +30,12 @@ body {
 
 #inputGrid, #outputGrid {
     display: grid;
-    gap: 5px;
+    gap: 2px;
 }
 
 .grid-cell {
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     background-color: white;
     border: 1px solid #ccc;
     cursor: pointer;

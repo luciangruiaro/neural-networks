@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_LEARNING_RATE;
 
-@Component
 public class MathHelpers {
 
     private MathHelpers() {

@@ -1,6 +1,5 @@
 package ro.luciangruia.neuralnetworks.simpleNeuron;
 
-import org.springframework.stereotype.Component;
 import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.SN_OUTPUT_THRESHOLD;
@@ -10,7 +9,6 @@ import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
 import static ro.luciangruia.neuralnetworks.simpleNeuron.SNPrinter.printNeuronCreation;
 import static ro.luciangruia.neuralnetworks.simpleNeuron.SNPrinter.printNeuronState;
 
-@Component
 public class SNeuron {
 
     public int noInputs;

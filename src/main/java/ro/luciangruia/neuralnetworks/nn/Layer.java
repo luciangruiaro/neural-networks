@@ -1,16 +1,17 @@
 package ro.luciangruia.neuralnetworks.nn;
 
-import org.springframework.stereotype.Component;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_INPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_HIDDEN_LAYERS;
-import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_NO_NEURONS_PER_HIDDEN_LAYERS;
+import static ro.luciangruia.neuralnetworks.config.GlobalConfig.NN_OUTPUT_NEURONS;
 
-@Component
+
 public class Layer {
     public Neuron[] neurons;
 
@@ -64,5 +65,26 @@ public class Layer {
         }
         return outputs;
     }
+
+    // JSON representation of the layer
+    public JSONObject toJSON() {
+        JSONObject jsonLayer = new JSONObject();
+        JSONArray jsonNeurons = new JSONArray();
+        for (Neuron neuron : neurons) {
+            jsonNeurons.put(neuron.toJSON());
+        }
+        jsonLayer.put("neurons", jsonNeurons);
+        return jsonLayer;
+    }
+
+    public static Layer fromJSON(JSONObject jsonLayer) {
+        JSONArray jsonNeurons = jsonLayer.getJSONArray("neurons");
+        Layer layer = new Layer(jsonNeurons.length(), jsonNeurons.getJSONObject(0).getInt("noInputs"));
+        for (int i = 0; i < jsonNeurons.length(); i++) {
+            layer.neurons[i] = Neuron.fromJSON(jsonNeurons.getJSONObject(i));
+        }
+        return layer;
+    }
+
 
 }

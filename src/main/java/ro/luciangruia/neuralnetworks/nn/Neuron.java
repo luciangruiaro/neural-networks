@@ -1,12 +1,12 @@
 package ro.luciangruia.neuralnetworks.nn;
 
-import org.springframework.stereotype.Component;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.generateRandomWeight;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.gradientDescent;
 import static ro.luciangruia.neuralnetworks.helpers.MathHelpers.sigmoid;
 
-@Component
 public class Neuron {
     public int noInputs;
     public double[] weights;
@@ -49,6 +49,9 @@ public class Neuron {
 
     // Adjust weights using the computed delta
     public void adjustWeights(double[] inputs) {
+        if (inputs.length != noInputs) {
+            throw new IllegalArgumentException("Input array size (" + inputs.length + ") does not match expected size (" + noInputs + ").");
+        }
         for (int i = 0; i < noInputs; i++) {
             weights[i] += gradientDescent(delta * inputs[i]);
         }
@@ -57,6 +60,27 @@ public class Neuron {
 
     public void adjustBiasWeight() {
         biasWeight += gradientDescent(delta);
+    }
+
+    // JSON representation of the neuron
+    public JSONObject toJSON() {
+        JSONObject jsonNeuron = new JSONObject();
+        jsonNeuron.put("noInputs", noInputs);
+        jsonNeuron.put("weights", new JSONArray(weights));
+        jsonNeuron.put("biasWeight", biasWeight);
+        jsonNeuron.put("delta", delta);
+        return jsonNeuron;
+    }
+
+    public static Neuron fromJSON(JSONObject jsonNeuron) {
+        Neuron neuron = new Neuron(jsonNeuron.getInt("noInputs"));
+        JSONArray jsonWeights = jsonNeuron.getJSONArray("weights");
+        for (int i = 0; i < jsonWeights.length(); i++) {
+            neuron.weights[i] = jsonWeights.getDouble(i);
+        }
+        neuron.biasWeight = jsonNeuron.getDouble("biasWeight");
+        neuron.delta = jsonNeuron.getDouble("delta");
+        return neuron;
     }
 
 

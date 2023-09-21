@@ -1,27 +1,29 @@
 package ro.luciangruia.neuralnetworks.nn;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import ro.luciangruia.neuralnetworks.helpers.MathHelpers;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ro.luciangruia.neuralnetworks.nn.Layer.calculateOutputsForLayer;
 import static ro.luciangruia.neuralnetworks.nn.Layer.createHiddenLayers;
-import static ro.luciangruia.neuralnetworks.nn.Layer.createInputLayer;
 import static ro.luciangruia.neuralnetworks.nn.Layer.createOutputLayer;
 
 @Component
 public class NN {
 
 
-    public Layer inputLayer;
     public List<Layer> hiddenLayers;
     public Layer outputLayer;
     public double[][] hiddenLayerOutputs;
     public double[] outputLayerOutputs;
 
     public NN() {
-        inputLayer = createInputLayer();
         hiddenLayers = createHiddenLayers();
         outputLayer = createOutputLayer();
     }
@@ -52,6 +54,10 @@ public class NN {
     }
 
     public static void updateDeltasOutputLayer(double[] expectedOutputs, double[] outputLayerOutputs, NN network) {
+        if (expectedOutputs.length != outputLayerOutputs.length ||
+                expectedOutputs.length != network.outputLayer.neurons.length) {
+            throw new IllegalArgumentException("Mismatch in array sizes.");
+        }
         for (int j = 0; j < network.outputLayer.neurons.length; j++) {
             network.outputLayer.neurons[j].delta = MathHelpers.computeDeltaForOutput(expectedOutputs[j], outputLayerOutputs[j]);
         }
@@ -82,15 +88,56 @@ public class NN {
     }
 
     public void adjustAllWeights(double[] inputsVector) {
-        for (Layer layer : hiddenLayers) {
-            for (Neuron neuron : layer.neurons) {
-                neuron.adjustWeights(inputsVector);
-                // Update the input for the next layer using the current layer's outputs
-                inputsVector = calculateOutputsForLayer(inputsVector, layer);
-            }
-        }
-        for (Neuron neuron : outputLayer.neurons) {
+    double[] newInputsVector;
+    for (Layer layer : hiddenLayers) {
+        newInputsVector = calculateOutputsForLayer(inputsVector, layer); // calculate once for the entire layer
+        for (Neuron neuron : layer.neurons) {
             neuron.adjustWeights(inputsVector);
+        }
+        inputsVector = newInputsVector; // assign the new inputs for the next layer
+    }
+    for (Neuron neuron : outputLayer.neurons) {
+        neuron.adjustWeights(inputsVector);
+    }
+}
+
+
+    // JSON representation of the network
+    public void saveToJSON(String filename) {
+        JSONObject jsonNN = new JSONObject();
+
+        JSONArray jsonHiddenLayers = new JSONArray();
+        for (Layer layer : hiddenLayers) {
+            jsonHiddenLayers.put(layer.toJSON());
+        }
+        jsonNN.put("hiddenLayers", jsonHiddenLayers);
+        jsonNN.put("outputLayer", outputLayer.toJSON());
+
+        try {
+            Files.write(Paths.get(filename), jsonNN.toString().getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static NN loadFromJSON(String filename) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filename)));
+            JSONObject jsonNN = new JSONObject(content);
+
+            NN nn = new NN();
+            nn.hiddenLayers = new ArrayList<>();
+            JSONArray jsonHiddenLayers = jsonNN.getJSONArray("hiddenLayers");
+            for (int i = 0; i < jsonHiddenLayers.length(); i++) {
+                nn.hiddenLayers.add(Layer.fromJSON(jsonHiddenLayers.getJSONObject(i)));
+            }
+            nn.outputLayer = Layer.fromJSON(jsonNN.getJSONObject("outputLayer"));
+
+            return nn;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
