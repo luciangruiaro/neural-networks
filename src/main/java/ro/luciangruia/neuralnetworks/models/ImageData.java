@@ -14,6 +14,10 @@ public class ImageData {
         this.label = label;
     }
 
+    public ImageData() {
+        // Default constructor for Jackson
+    }
+
     public void printImage() {
         System.out.println("Image:");
         for (List<Integer> row : image) {
