@@ -30,8 +30,8 @@ public class GlobalConfig {
     public static final int NN_NO_NEURONS_PER_HIDDEN_LAYERS = 16; // 16 neurons per hidden layer
     public static final int NN_OUTPUT_NEURONS = 10; // 10 output neurons
     public static final int NN_EPOCHS = 50; // 50 epochs
-    public static final int NN_TRAINING_SET_SIZE = 100; // 50 matrices
-    public static final int NN_TRAINING_REQ_LABEL = 2; // -1 to train all numbers from 0 to 9
+    public static final int NN_TRAINING_SET_SIZE = 10000; // 50 matrices
+    public static final int NN_TRAINING_REQ_LABEL = -1; // -1 to train all numbers from 0 to 9
     public static final double NN_LEARNING_RATE = 0.1;
 
 

@@ -48,6 +48,7 @@ public class NNController {
     @ResponseBody
     public String train() throws IOException {
         nnService.trainNN(nn);
+
         return "Training done...";
     }
 
@@ -68,7 +69,7 @@ public class NNController {
     @ResponseBody
     public ResponseEntity<?> submitTestData(@RequestBody TrainingData data) {
         dataHelper.print1Dto2D(data.getInput());
-        nnService.testNN(dataHelper.transform1Dto2D(data.getInput()));
+        nnService.testNN(dataHelper.transform1Dto2D(data.getInput()), nn);
         return ResponseEntity.ok("Data received successfully!");
     }
 

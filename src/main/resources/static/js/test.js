@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Reload the page after submitting
-        location.reload();
+        // location.reload();
     });
 });
 

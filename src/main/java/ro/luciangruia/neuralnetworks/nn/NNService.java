@@ -32,11 +32,10 @@ public class NNService {
                 nn);
         PythonApi.pyPlotPredictedOutputs(predictedOutputs, NN_TRAINING_REQ_LABEL);
         nn.saveToJSON("nn.json");
-        System.out.println("Predicted outputs: ");
+        nn.loadFromJSON("nn.json");
     }
 
-    public void testNN(double[][] inputsMatrix) {
-        NN nn = new NN();
+    public void testNN(double[][] inputsMatrix, NN nn) {
         TestNN.testSN(MathHelpers.flattenMatrix(inputsMatrix), nn);
     }
 
