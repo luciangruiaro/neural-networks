@@ -46,7 +46,7 @@ public class NNController {
     @GetMapping("/train")
     @ResponseBody
     public String train() throws IOException {
-        return nnService.trainNN(nn);
+        return nnService.trainNN();
     }
 
     @GetMapping("/test")

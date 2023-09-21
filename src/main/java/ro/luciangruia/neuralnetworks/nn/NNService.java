@@ -36,8 +36,8 @@ public class NNService {
 
     }
 
-    public String trainNN(NN nn) throws IOException {
-//        nn.loadFromJSON(NN_JSON_MODEL);
+    public String trainNN() throws IOException {
+        nn = nn.loadFromJSON(NN_JSON_MODEL);
         // take training images
         List<ImageData> trainingImages = loadTrainingData();
         // train the NN and collect predictions
@@ -46,13 +46,14 @@ public class NNService {
                         Pair.transformListToTrainingData(trainingImages).images,
                         Pair.transformListToTrainingData(trainingImages).labels);
         // plot the predicted outputs
-//        PythonApi.pyPlotPredictedOutputs(predictedOutputs, NN_TRAINING_REQ_LABEL);
+        PythonApi.pyPlotPredictedOutputs(predictedOutputs, NN_TRAINING_REQ_LABEL);
         nn.saveToJSON(NN_JSON_MODEL);
 
         return Arrays.stream(nn.outputLayerOutputs).mapToObj(Double::toString).collect(Collectors.joining(", "));
     }
 
     public void testNN(double[][] inputsMatrix) {
+        nn = nn.loadFromJSON(NN_JSON_MODEL);
         nn.inputsVector = flattenMatrix(inputsMatrix);
         testNN.go();
     }
