@@ -16,6 +16,14 @@ https://drive.google.com/file/d/1eu0M8DejW-8BbnhbvfcwwJxl6NuNTNfO/view?usp=shari
 - Training, Testing, Epochs
 - Neural network architecture, Neural layers, Deep Learning
 
+### Related talks:
+- AI state of the art 2022: Building AI apps with Java, Tensorflow & DeepLearning4j https://youtu.be/J7q0WKNIPi0?si=ChhoqtCN-ObkPPXY
+- Building full stack AI chatbots with Java | Live coding session
+https://youtu.be/Mig5x4K_OoY?si=E8d3kYxBUh6lbORI
+
+### Related articles:
+- https://neuroaugmentare.ro/tag/learn-ai-in-2022-the-complete-guide/
+
 ### Resources:
 - https://github.com/mrsaeeddev/free-ai-resources
 - https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/understanding-machine-learning-theory-algorithms.pdf
