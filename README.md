@@ -22,6 +22,7 @@ https://drive.google.com/file/d/1eu0M8DejW-8BbnhbvfcwwJxl6NuNTNfO/view?usp=shari
 https://youtu.be/Mig5x4K_OoY?si=E8d3kYxBUh6lbORI
 
 ### Related articles:
+- https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=6960521797251284992
 - https://neuroaugmentare.ro/tag/learn-ai-in-2022-the-complete-guide/
 
 ### Resources:
